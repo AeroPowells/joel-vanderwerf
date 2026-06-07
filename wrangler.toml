@@ -1,0 +1,4 @@
+# Optional — for deploying via Wrangler CLI:
+#   npx wrangler pages deploy . --project-name=joel-vanderwerf
+name = "joel-vanderwerf"
+pages_build_output_dir = "."
