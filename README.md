@@ -21,12 +21,12 @@ Static site. No build step. Free on [Cloudflare Pages](https://pages.cloudflare.
 
 | Setting | Value |
 |---------|-------|
-| **Root directory** | *(leave empty — not `/deploy/`)* |
-| **Build command** | *(leave empty)* |
+| **Root directory** | `.` |
+| **Build command** | *(empty)* |
 | **Deploy command** | `npx wrangler deploy` |
-| **Build output directory** | *(leave empty — not used with wrangler deploy)* |
+| **Build output directory** | `.` |
 
-The deploy command box looking "blank" is normal — type `npx wrangler deploy` into it if it is empty. This repo includes a `wrangler.toml` that tells Wrangler to serve the static files from the project root.
+Static files are in `public/`. Wrangler deploys only that folder — not `node_modules`.
 
 4. Save and **Retry deployment**.
 
@@ -47,9 +47,9 @@ npx wrangler pages deploy . --project-name=joel-vanderwerf
 
 ## Before going live
 
-- [ ] Replace `hello@joelvanderwerf.com` in `index.html` with Joel's real email
+- [ ] Replace `hello@joelvanderwerf.com` in `public/index.html` with Joel's real email
 - [ ] Add Joel's photo (replace the placeholder in the hero)
-- [ ] Swap placeholder games in `js/games-data.js` with real PGNs
+- [ ] Swap placeholder games in `public/js/games-data.js` with real PGNs
 - [ ] Submit the contact form once to activate [FormSubmit](https://formsubmit.co/) (check Joel's inbox for the confirmation link)
 
 The contact form redirect (`?sent=1`) works on any URL automatically — no need to update it when you add a custom domain.
@@ -57,7 +57,7 @@ The contact form redirect (`?sent=1`) works on any URL automatically — no need
 ## Preview locally
 
 ```bash
-python3 -m http.server 8080
+python3 -m http.server 8080 --directory public
 ```
 
 Open [http://localhost:8080](http://localhost:8080).
@@ -65,14 +65,13 @@ Open [http://localhost:8080](http://localhost:8080).
 ## File structure
 
 ```
-index.html          Home page
-games.html          Best games + interactive board
-css/styles.css      Styles
-css/games.css       Games page
-js/main.js          Nav, form redirect, toast
-js/board.js         Chess board
-js/games-data.js    Game PGNs (edit this)
-js/games.js         Game replay UI
-favicon.svg
-wrangler.toml       Optional CLI deploy config
+public/               Website (HTML, CSS, JS)
+  index.html
+  games.html
+  css/
+  js/
+  favicon.svg
+wrangler.toml         Deploy config (assets → public/)
+package.json          Wrangler dependency
+README.md
 ```
