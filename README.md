@@ -13,26 +13,22 @@ Static site. No build step. Free on [Cloudflare Pages](https://pages.cloudflare.
 
 ### Recommended: Git + auto-deploy
 
-1. Push this repo to GitHub:
+1. Push this repo to GitHub (already at `AeroPowells/joel-vanderwerf`).
 
-```bash
-git init
-git add .
-git commit -m "Initial site"
-gh repo create joel-vanderwerf --public --source=. --push
-```
+2. Cloudflare Dashboard → **Workers & Pages** → your project → **Settings** → **Build**.
 
-(Or create a repo on GitHub manually and push.)
+3. Use these settings exactly:
 
-2. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-3. Select the repo.
-4. Build settings:
-   - **Framework preset:** None
-   - **Build command:** *(empty)*
-   - **Build output directory:** `/`
-5. **Save and Deploy**.
+| Setting | Value |
+|---------|-------|
+| **Root directory** | *(leave empty — not `/deploy/`)* |
+| **Build command** | *(leave empty)* |
+| **Deploy command** | `npx wrangler deploy` |
+| **Build output directory** | *(leave empty — not used with wrangler deploy)* |
 
-Every push to `main` redeploys automatically.
+The deploy command box looking "blank" is normal — type `npx wrangler deploy` into it if it is empty. This repo includes a `wrangler.toml` that tells Wrangler to serve the static files from the project root.
+
+4. Save and **Retry deployment**.
 
 ### CLI deploy (optional)
 
